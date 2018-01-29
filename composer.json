@@ -1,7 +1,7 @@
 {
   "name" : "xpat/crud-bundle",
   "description" : "Base controller for crud",
-  "version" : "1.0.0",
+  "version" : "1.0.1",
   "type" : "symfony-bundle",
   "homepage": "https://github.com/xpat23/XPatCrudBundle",
   "license" : "MIT",
