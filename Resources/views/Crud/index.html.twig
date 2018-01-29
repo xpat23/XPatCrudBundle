@@ -1,0 +1,66 @@
+{% extends "@XPatCrud/layaut.html.twig" %}
+{# @var params \XPat\CrudBundle\Service\CrudControllerParameters #}
+{% block stylesheets %}
+    {% for src in params.listConfig.styles %}
+        <link type="text/css" rel="stylesheet" href="{{ asset(src) }}"/>
+    {% endfor %}
+{% endblock %}
+{% block header %}
+    <h3>
+        {{ params.title }}
+        <small>List</small>
+    </h3>
+    <a href="{{ path(params.routePrefix~"new") }}" class="btn btn-primary">{{ "new"|trans }}</a>
+{% endblock %}
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                {% for field,label in params.listConfig.fields %}
+                    <th>{{ label }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    {% for field,label in params.listConfig.fields %}
+                        <td>
+                            {% if attribute(entity, field) is defined %}
+                                {# datetime field #}
+                                {% if attribute(entity, field).timestamp is defined  %}
+                                    {{ attribute(entity, field)|date("d.m.Y H:i:s") }}
+                                {% elseif attribute(entity, field) is iterable %}
+                                    <ul>
+                                        {% for item in attribute(entity, field) %}
+                                            <li>
+                                                {{ item }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ attribute(entity, field) }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ path(params.routePrefix ~ "show",{ id: entity.id }) }}" class="btn btn-default btn-sm">show</a>
+                            <a href="{{ path(params.routePrefix ~ "edit",{ id: entity.id }) }}" class="btn btn-info btn-sm">edit</a>
+                            <a href="{{ path(params.routePrefix ~ "delete",{ id: entity.id }) }}" class="btn btn-danger btn-sm">delete</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block javascripts %}
+    {% for src in params.listConfig.scripts %}
+        <script type="text/javascript" src="{{ asset(src) }}"></script>
+    {% endfor %}
+{% endblock %}

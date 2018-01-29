@@ -1,0 +1,5 @@
+services:
+    x_pat_crud.controller_params:
+        class: XPat\CrudBundle\Service\CrudControllerParameters
+        arguments: ["@request_stack"]
+        public: true

@@ -1,0 +1,64 @@
+{% extends "@XPatCrud/layaut.html.twig" %}
+{# @var params \XPat\CrudBundle\Service\CrudControllerParameters #}
+
+{% block stylesheets %}
+    {% for src in params.showConfig.styles %}
+        <link type="text/css" rel="stylesheet" href="{{ asset(src) }}"/>
+    {% endfor %}
+{% endblock %}
+{% block header %}
+    <h3>
+        {{ params.title }}
+        <small>List</small>
+    </h3>
+    <a href="{{ path(params.routePrefix~"index") }}" class="btn btn-default">{{ "list"|trans }}</a>
+    <br/>
+    <br/>
+{% endblock %}
+{% block content %}
+    <table class="table table-bordered">
+        <tbody>
+            {% for field,label in params.showConfig.fields %}
+                <tr>
+                    <th>{{ label }}</th>
+                    <td>
+                        {% if attribute(entity, field) is defined %}
+                            {# datetime field #}
+                            {% if attribute(entity, field).timestamp is defined  %}
+                                {{ attribute(entity, field)|date("d.m.Y H:i:s") }}
+                            {% elseif attribute(entity, field) is iterable %}
+                                <ul>
+                                    {% for item in attribute(entity, field) %}
+                                        <li>
+                                            {{ item }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                {{ attribute(entity, field) }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% endfor %}
+                <tr>
+                    <th> actions </th>
+                    <td>
+                        <div class="btn-group">
+                            <a href="{{ path(params.routePrefix ~ "show",{ id: entity.id }) }}" class="btn btn-default btn-sm">show</a>
+                            <a href="{{ path(params.routePrefix ~ "edit",{ id: entity.id }) }}" class="btn btn-info btn-sm">edit</a>
+                            <a href="{{ path(params.routePrefix ~ "edit",{ id: entity.id }) }}" class="btn btn-danger btn-sm">delete</a>
+                        </div>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block javascripts %}
+    {% for src in params.showConfig.scripts %}
+        <script type="text/javascript" src="{{ asset(src) }}"></script>
+    {% endfor %}
+{% endblock %}

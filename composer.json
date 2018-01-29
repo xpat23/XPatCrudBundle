@@ -1,0 +1,27 @@
+{
+  "name" : "xpat/crud-bundle",
+  "description" : "Base controller for crud",
+  "version" : "1.0.0",
+  "type" : "symfony-bundle",
+  "homepage": "https://github.com/xpat23/XPatCrudBundle",
+  "license" : "MIT",
+  "keywords" : ["crud", "xpat","crud bundle","xpat crud bundle"],
+  "authors" : [{
+    "name" : "Alymbek Kydyrmyshev",
+    "email" : "x.pat.kg@gmail.com"
+  }],
+  "require" : {
+    "php": ">=5.4",
+    "symfony/symfony": ">=2.8"
+  },
+  "suggest": {
+  },
+  "autoload" : {
+    "psr-4" : { "XPat\\CrudBundle\\" : "" }
+  },
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "1.0.x-dev"
+    }
+  }
+}
