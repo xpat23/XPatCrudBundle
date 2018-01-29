@@ -11,7 +11,7 @@
     "email" : "x.pat.kg@gmail.com"
   }],
   "require" : {
-    "php": ">=5.4",
+    "php": ">=7.0",
     "symfony/symfony": ">=2.8"
   },
   "suggest": {
